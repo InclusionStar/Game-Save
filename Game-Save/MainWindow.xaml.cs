@@ -23,6 +23,8 @@ namespace Game_Save
         public MainWindow()
         {
             InitializeComponent();
+
+            DataContext = new MainWindowViewModel();
         }
     }
 }
