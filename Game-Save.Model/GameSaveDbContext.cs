@@ -7,8 +7,13 @@ namespace Game_Save.Model
         public DbSet<Game> Games { get; set; }
         public DbSet<GameSlot> GameSlots { get; set; }
         public DbSet<GameSave> GameSaves { get; set; }
-        
-        public GameSaveDbContext(DbContextOptions<GameSaveDbContext> options)
-            :base(options){ }
+
+        protected override void OnConfiguring(
+            DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlite("Data Source=.\\GameSave.db;Version=3;");
+            optionsBuilder.UseLazyLoadingProxies();
+            base.OnConfiguring(optionsBuilder);
+        }
     }
 }
