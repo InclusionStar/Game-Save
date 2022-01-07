@@ -14,7 +14,7 @@ namespace Game_Save
             remove => CommandManager.RequerySuggested -= value; 
         }
 
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null!)
         {
             _execute = execute;
             _canExecute = canExecute;
@@ -22,12 +22,12 @@ namespace Game_Save
 
         public bool CanExecute(object? parameter)
         {
-            return _canExecute(parameter);
+            return parameter != null && _canExecute(parameter);
         }
 
         public void Execute(object? parameter)
         {
-            _execute(parameter);
+            if (parameter != null) _execute(parameter);
         }
     }
 }
