@@ -8,4 +8,8 @@
         <UseWPF>true</UseWPF>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Game-Save.Model\Game-Save.Model.csproj" />
+    </ItemGroup>
+
 </Project>
