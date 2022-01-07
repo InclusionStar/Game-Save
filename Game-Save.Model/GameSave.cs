@@ -8,7 +8,7 @@
         public int Percentage { get; set; }
         public int MarkedByStar { get; set; }
         
-        public int GameSlotsId { get; set; }
+        public int GameSlotId { get; set; }
         public GameSlot GameSlot { get; set; }
     }
 }
