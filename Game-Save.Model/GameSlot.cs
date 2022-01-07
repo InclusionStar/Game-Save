@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 
 namespace Game_Save.Model
 {
@@ -17,5 +18,15 @@ namespace Game_Save.Model
         public Game Game { get; set; }
 
         public List<GameSave> GameSaves { get; set; }
+
+        
+        public void StartListening()
+        {
+            var watcher = new FileSystemWatcher();
+            watcher.Changed += OnChange;
+        }
+
+        private void OnChange(object sender, FileSystemEventArgs e)
+            => File.Copy(Path, @"\Storage\");
     }
 }
