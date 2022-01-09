@@ -10,14 +10,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace WpfApp1.View
+namespace Game_Save.View
 {
     /// <summary>
-    /// Логика взаимодействия для Add.xaml
+    /// Логика взаимодействия для WindowForAllGames.xaml
     /// </summary>
-    public partial class Add : Window
+    public partial class WindowForAllGames : Window
     {
-        public Add()
+        public WindowForAllGames()
         {
             InitializeComponent();
         }

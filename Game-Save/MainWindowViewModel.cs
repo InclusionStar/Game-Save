@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Game_Save.Model;
 using Microsoft.EntityFrameworkCore;
 
@@ -33,6 +34,21 @@ namespace Game_Save
                 db.Games.Add(game);
                 db.SaveChanges();
             });
+        }
+        public static List<Game> GetAllGames()
+        {
+            using (GameSaveDbContext db = new GameSaveDbContext())
+            {
+                try
+                {
+                    var result = db.Games.ToList();
+                    return result;
+                }
+                catch
+                {
+                    return new List<Game>();
+                }
+            }
         }
 
         public RelayCommand AddGameSlot

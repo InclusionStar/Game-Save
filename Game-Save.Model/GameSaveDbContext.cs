@@ -11,8 +11,7 @@ namespace Game_Save.Model
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite("Data Source=.\\GameSave.db;Version=3;");
-            optionsBuilder.UseLazyLoadingProxies();
+            optionsBuilder.UseSqlite("Data Source=.\\GameSave.db");
             base.OnConfiguring(optionsBuilder);
         }
     }

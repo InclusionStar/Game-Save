@@ -12,4 +12,8 @@
       <ProjectReference Include="..\Game-Save.Model\Game-Save.Model.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    </ItemGroup>
+
 </Project>
