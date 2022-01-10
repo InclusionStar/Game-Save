@@ -12,7 +12,7 @@ namespace Game_Save.ViewModel
 {
     public class DataManageMV : INotifyPropertyChanged
     {
-        private List<Game> allGames = MainWindowViewModel.GetAllGames(); //получает список игр , отсюда так же можно передавать их на страницу
+        private List<Game> allGames = MainWindowViewModel.GetAllGames();
         public List<Game> AllGames
         {
             get

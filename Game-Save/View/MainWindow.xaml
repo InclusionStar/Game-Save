@@ -14,56 +14,34 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="#FFFFFF" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top">
             <ScrollViewer CanContentScroll="True">
-                <StackPanel>
-                    <ListView  x:Name="ViewAllGames" ItemsSource="{Binding AllGames}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn>
-                                    <Border MinWidth="400" MaxHeight="150" Background="#6CC3F4" Margin="15" Padding="40 10 20 0" CornerRadius="20" Height="90">
-                                        <Border.Effect>
-                                            <DropShadowEffect BlurRadius="10" Color="LightGray" ShadowDepth="10"/>
-                                        </Border.Effect>
+                <ItemsControl  x:Name="ViewAllGames" ItemsSource="{Binding AllGames}" Height="auto">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Border MinWidth="400" MaxHeight="150" Background="#6CC3F4" Margin="15" Padding="40 10 20 0" CornerRadius="20" Height="90" Width="700">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="10" Color="LightGray" ShadowDepth="10"/>
+                                    </Border.Effect>
+                                    <Grid>
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Path=Title}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 0 20 0"/>
+                                            <TextBlock Text="{Binding Path=MostPercentage}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Margin="450 0 0 0"/>
+                                        </WrapPanel>
                                         <Grid>
-                                            <WrapPanel>
-                                                <TextBlock Text="GTA 5" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 0 20 0"/>
-                                                <TextBlock Text="2 сохранения" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Margin="450 0 0 0"/>
-                                            </WrapPanel>
-                                            <Grid>
-                                                <Button HorizontalAlignment="Right" Content="Расположение&#10;сохранений" Height="42" Margin="0 25 0 0"/>
-                                                <Button HorizontalAlignment="Right" Content="Все сохранения" Margin="0 25 150 0" Height="42"/>
-                                            </Grid>
-                                            <CheckBox FontSize="20" Margin="0 10 0 0" Width="150" HorizontalAlignment="Left" >
-                                                <WrapPanel>
-                                                    <TextBlock Text="Избранное" Foreground="Black" Margin="0 0 0 5"/>
-                                                </WrapPanel>
-                                            </CheckBox>
+                                            <Button HorizontalAlignment="Right" Content="Расположение&#10;сохранений" Height="42" Margin="0 25 0 0"/>
+                                            <Button HorizontalAlignment="Right" Content="Все сохранения" Margin="0 25 150 0" Height="42"/>
                                         </Grid>
-                                    </Border>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                    <Border MinWidth="400" MaxHeight="150" Background="#6CC3F4" Margin="15" Padding="40 10 20 0" CornerRadius="20" Height="90">
-                            <Border.Effect>
-                                <DropShadowEffect BlurRadius="10" Color="LightGray" ShadowDepth="10"/>
-                            </Border.Effect>
-                            <Grid>
-                                <WrapPanel>
-                                    <TextBlock Text="GTA 5" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 0 20 0"/>
-                                    <TextBlock Text="2 сохранения" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Margin="450 0 0 0"/>
-                                </WrapPanel>
-                                <Grid>
-                                    <Button HorizontalAlignment="Right" Content="Расположение&#10;сохранений" Height="42" Margin="0 25 0 0"/>
-                                    <Button HorizontalAlignment="Right" Content="Все сохранения" Margin="0 25 150 0" Height="42"/>
-                                </Grid>
-                                <CheckBox FontSize="20" Margin="0 10 0 0" Width="150" HorizontalAlignment="Left" >
-                                    <WrapPanel>
-                                        <TextBlock Text="Избранное" Foreground="Black" Margin="0 0 0 5"/>
-                                    </WrapPanel>
-                                </CheckBox>
-                            </Grid>
-                        </Border>
-                </StackPanel>
+                                        <CheckBox FontSize="20" Margin="0 10 0 0" Width="150" HorizontalAlignment="Left" >
+                                            <WrapPanel>
+                                                <TextBlock Text="Избранное" Foreground="Black" Margin="0 0 0 5"/>
+                                            </WrapPanel>
+                                        </CheckBox>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </ScrollViewer>
         </Grid>
         <Grid Grid.Column="1" Width="300" HorizontalAlignment="Right" Height="380" VerticalAlignment="Top">

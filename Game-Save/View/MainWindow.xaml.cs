@@ -21,10 +21,12 @@ namespace Game_Save
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ItemsControl AllGamesView;
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new DataManageMV();
+            this.DataContext = new DataManageMV();
+            AllGamesView = ViewAllGames;
         }
     }
 }
