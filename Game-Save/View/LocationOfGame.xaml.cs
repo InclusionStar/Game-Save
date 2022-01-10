@@ -10,23 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Game_Save.ViewModel;
 
-namespace Game_Save
+namespace Game_Save.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для LocationOfGame.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LocationOfGame : Window
     {
-        public static ItemsControl AllGamesView;
-        public MainWindow()
+        public LocationOfGame()
         {
             InitializeComponent();
-            DataContext = new MainWindowVM();
-            AllGamesView = ViewAllGames;
         }
     }
 }

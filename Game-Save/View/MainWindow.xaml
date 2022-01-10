@@ -25,11 +25,10 @@
                                     <Grid>
                                         <WrapPanel>
                                             <TextBlock Text="{Binding Path=Title}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 0 20 0"/>
-                                            <TextBlock Text="{Binding Path=MostPercentage}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Right" Margin="450 0 0 0"/>
                                         </WrapPanel>
                                         <Grid>
-                                            <Button HorizontalAlignment="Right" Content="Расположение&#10;сохранений" Height="42" Margin="0 25 0 0"/>
-                                            <Button HorizontalAlignment="Right" Content="Все сохранения" Margin="0 25 150 0" Height="42"/>
+                                            <Button HorizontalAlignment="Right" Content="Расположение&#10;сохранения" Height="42" Margin="0 25 0 0" Command="{Binding OpenPathGameWnd}" CommandParameter="{Binding SelectedPhone}"/>
+                                            <Button HorizontalAlignment="Right" Content="Описание" Margin="0 25 150 0" Height="42"/>
                                         </Grid>
                                         <CheckBox FontSize="20" Margin="0 10 0 0" Width="150" HorizontalAlignment="Left" >
                                             <WrapPanel>
@@ -45,11 +44,11 @@
             </ScrollViewer>
         </Grid>
         <Grid Grid.Column="1" Width="300" HorizontalAlignment="Right" Height="380" VerticalAlignment="Top">
-            <TextBlock Text="ГТА 5 это игра нового поколения придуманная укропами , но мне очень нравится и поэтому я дальше играю в нее" TextWrapping="Wrap" FontSize="17" TextAlignment="Center"/>
+            <TextBlock Text="ГТА 5 это игра нового поколения придуманная очень веселыми ребятами , она стала очень популярной и прорывной в свое время , настолько что даже сейчас держит очень большой онлайн" TextWrapping="Wrap" FontSize="17" TextAlignment="Center"/>
         </Grid>
         <Grid Grid.Column="1" VerticalAlignment="Bottom" Width="260" HorizontalAlignment="Right">
             <StackPanel>
-                <Button HorizontalAlignment="Right" Content="Поиск сохраненй" Height="40" Margin="0 0 30 10"/>
+                <Button HorizontalAlignment="Right" Content="Поиск сохраненй" Height="40" Margin="0 0 30 10" Cursor="Hand"/>
                 <Button HorizontalAlignment="Right" Content="Добавить сохранение игры" Height="40" Margin="0 0 30 10" Command="{Binding OpenAddGameWnd}" Cursor="Hand"/>
             </StackPanel>
         </Grid>
