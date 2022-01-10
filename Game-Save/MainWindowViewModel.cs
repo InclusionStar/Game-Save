@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Game_Save.Model;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.ObjectModel;
 
 namespace Game_Save
 {
@@ -17,23 +19,7 @@ namespace Game_Save
         private IEnumerable<GameSlot> gameSlots;
         private IEnumerable<GameSave> gameSaves;
 
-        #region Bindings
-        
-        public Game GameToAdd { get; set; }
-        
-        #endregion
-        
         #region Commands
-        
-        public RelayCommand AddGame
-        {
-            get => addGame = new RelayCommand(obj =>
-            {
-                var game = obj as Game;
-                db.Games.Add(game);
-                db.SaveChanges();
-            });
-        }
 
         public RelayCommand AddGameSlot
         {

@@ -22,12 +22,12 @@ namespace Game_Save
 
         public bool CanExecute(object? parameter)
         {
-            return parameter != null && _canExecute(parameter);
+            return _canExecute == null || _canExecute(parameter);
         }
 
         public void Execute(object? parameter)
         {
-            if (parameter != null) _execute(parameter);
+            _execute(parameter);
         }
     }
 }

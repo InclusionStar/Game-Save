@@ -1,0 +1,56 @@
+﻿<Window x:Class="Game_Save.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Game_Save"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Save Game" Height="520" Width="1100">
+    <Grid MinWidth="1100" MinHeight="500" MaxWidth="1200" MaxHeight="520">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Background="#FFFFFF" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ScrollViewer CanContentScroll="True">
+                <ItemsControl  x:Name="ViewAllGames" ItemsSource="{Binding AllGames}" Height="auto">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Border MinWidth="400" MaxHeight="150" Background="#6CC3F4" Margin="15" Padding="40 10 20 0" CornerRadius="20" Height="90" Width="700">
+                                    <Border.Effect>
+                                        <DropShadowEffect BlurRadius="10" Color="LightGray" ShadowDepth="10"/>
+                                    </Border.Effect>
+                                    <Grid>
+                                        <WrapPanel>
+                                            <TextBlock Text="{Binding Path=Title}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Left" Margin="0 0 20 0"/>
+                                        </WrapPanel>
+                                        <Grid>
+                                            <Button HorizontalAlignment="Right" Content="Расположение&#10;сохранения" Height="42" Margin="0 25 0 0" Command="{Binding OpenPathGameWnd}" CommandParameter="{Binding SelectedPhone}"/>
+                                            <Button HorizontalAlignment="Right" Content="Описание" Margin="0 25 150 0" Height="42"/>
+                                        </Grid>
+                                        <CheckBox FontSize="20" Margin="0 10 0 0" Width="150" HorizontalAlignment="Left" >
+                                            <WrapPanel>
+                                                <TextBlock Text="Избранное" Foreground="Black" Margin="0 0 0 5"/>
+                                            </WrapPanel>
+                                        </CheckBox>
+                                    </Grid>
+                                </Border>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        <Grid Grid.Column="1" Width="300" HorizontalAlignment="Right" Height="380" VerticalAlignment="Top">
+            <TextBlock Text="ГТА 5 это игра нового поколения придуманная очень веселыми ребятами , она стала очень популярной и прорывной в свое время , настолько что даже сейчас держит очень большой онлайн" TextWrapping="Wrap" FontSize="17" TextAlignment="Center"/>
+        </Grid>
+        <Grid Grid.Column="1" VerticalAlignment="Bottom" Width="260" HorizontalAlignment="Right">
+            <StackPanel>
+                <Button HorizontalAlignment="Right" Content="Поиск сохраненй" Height="40" Margin="0 0 30 10" Cursor="Hand"/>
+                <Button HorizontalAlignment="Right" Content="Добавить сохранение игры" Height="40" Margin="0 0 30 10" Command="{Binding OpenAddGameWnd}" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

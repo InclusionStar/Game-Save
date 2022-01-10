@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Game_Save.ViewModel;
 
 namespace Game_Save
 {
@@ -20,11 +21,12 @@ namespace Game_Save
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static ItemsControl AllGamesView;
         public MainWindow()
         {
             InitializeComponent();
-
-            DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowVM();
+            AllGamesView = ViewAllGames;
         }
     }
 }
