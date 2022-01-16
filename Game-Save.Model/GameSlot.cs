@@ -11,16 +11,5 @@ namespace Game_Save.Model
         public int GameId { get; set; }
         public Game? Game { get; set; }
         public List<GameSave>? GameSaves { get; set; }
-        
-        public void StartListening()
-        {
-            var watcher = new FileSystemWatcher();
-            watcher.Changed += OnChange;
-        }
-
-        private void OnChange(object sender, FileSystemEventArgs e)
-        {
-            if (Path != null) File.Copy(Path, @"\Storage\");
-        }
     }
 }
