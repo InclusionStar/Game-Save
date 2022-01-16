@@ -44,11 +44,10 @@
             </ScrollViewer>
         </Grid>
         <Grid Grid.Column="1" Width="300" HorizontalAlignment="Right" Height="380" VerticalAlignment="Top">
-            <TextBlock Text="ГТА 5 это игра нового поколения придуманная очень веселыми ребятами , она стала очень популярной и прорывной в свое время , настолько что даже сейчас держит очень большой онлайн" TextWrapping="Wrap" FontSize="17" TextAlignment="Center"/>
+            <TextBlock Text="" TextWrapping="Wrap" FontSize="17" TextAlignment="Center"/>
         </Grid>
         <Grid Grid.Column="1" VerticalAlignment="Bottom" Width="260" HorizontalAlignment="Right">
             <StackPanel>
-                <Button HorizontalAlignment="Right" Content="Поиск сохраненй" Height="40" Margin="0 0 30 10" Cursor="Hand"/>
                 <Button HorizontalAlignment="Right" Content="Добавить сохранение игры" Height="40" Margin="0 0 30 10" Command="{Binding OpenAddGameWnd}" Cursor="Hand"/>
             </StackPanel>
         </Grid>

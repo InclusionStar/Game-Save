@@ -16,16 +16,13 @@ namespace Game_Save.ViewModel
         private IEnumerable<Game> games;
         private IEnumerable<GameSlot> gameSlots;
         private IEnumerable<GameSave> gameSaves;
-
-        private RelayCommand addGame;
-
+        
         public string GameName { get; set; }
         public string GamePath { get; set; }
-
-
-        private RelayCommand openDialogWindow;
+        
+        private RelayCommand? openDialogWindow;
         public RelayCommand OpenDialogWindow
-            => openDialogWindow = new RelayCommand(obj =>
+            => openDialogWindow ?? new RelayCommand(obj =>
             {
                 OpenFileDialog openFileDialog = new();
                 openFileDialog.Filter = "All files(*.*)|*.*";
@@ -33,22 +30,24 @@ namespace Game_Save.ViewModel
                     GamePath = openFileDialog.FileName;
             });
 
+        private RelayCommand? addGame;
         public RelayCommand AddGame
         {
-            get => addGame = new RelayCommand(obj =>
+            get => addGame ?? new RelayCommand(obj =>
             {
                 var window = obj as Window;
-                var gameSave = new GameSave();
-                gameSave.GameSlot = new GameSlot { Path = GamePath,Name = GameName, };
-                gameSave.GameSlot.Game = new Game { Title = GameName};
-                gameSave.Path = GamePath;
-                db.GameSaves.Add(gameSave);
-                db.SaveChanges();
+                var gameSave = AddNewGame();
+                var fileName = Path.GetFileName(gameSave.Path);
                 UpdateAllDepartmentsView();
                 if (File.Exists(GamePath))
                 {
-                    //File.Copy(GamePath, $"./Storage/{GameName}/");
-                    //gameSave.GameSlot.StartListening();
+                    if (!Directory.Exists($"./Storage/"))
+                        Directory.CreateDirectory($"./Storage/");
+                    if (!Directory.Exists($"./Storage/{GameName}/"))
+                        Directory.CreateDirectory($"./Storage/{GameName}/");
+                    
+                    File.Copy(GamePath, $"./Storage/{GameName}/{fileName}");
+                    // gameSave.GameSlot.StartListening();
                 }
 
                 window.Close();
@@ -73,6 +72,23 @@ namespace Game_Save.ViewModel
             MainWindow.AllGamesView.Items.Clear();
             MainWindow.AllGamesView.ItemsSource = AllGames;
             MainWindow.AllGamesView.Items.Refresh();
+        }
+
+        private GameSave AddNewGame()
+        {
+            var gameSave = new GameSave
+            {
+                GameSlot = new GameSlot
+                {
+                    Path = GamePath, Name = GameName,
+                    Game = new Game { Title = GameName }
+                },
+                Path = GamePath
+            };
+            db.GameSaves.Add(gameSave);
+            db.SaveChanges();
+
+            return gameSave;
         }
     }
 }

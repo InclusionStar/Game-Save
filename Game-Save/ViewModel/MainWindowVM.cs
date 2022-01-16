@@ -44,7 +44,7 @@ namespace Game_Save.ViewModel
         public event PropertyChangedEventHandler? PropertyChanged;
 
 
-        private RelayCommand openAddGameWnd;
+        private RelayCommand? openAddGameWnd;
         public RelayCommand OpenAddGameWnd
         {
             get {
@@ -64,25 +64,25 @@ namespace Game_Save.ViewModel
             addGame.ShowDialog();
         }
 
-        private RelayCommand openPathGameWnd;
-        public RelayCommand OpenPathGameWnd
-        {
-            get
-            {
-                return openPathGameWnd ?? new RelayCommand(obj =>
-                {
-                    OpenPathGameWindowMethod();
-                }
-                );
-            }
-        }
-        private static void OpenPathGameWindowMethod()
-        {
-            LocationOfGame pathGame = new LocationOfGame();
-            pathGame.Owner = Application.Current.MainWindow;
-            pathGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            pathGame.ShowDialog();
-        }
+        // private RelayCommand openPathGameWnd;
+        // public RelayCommand OpenPathGameWnd
+        // {
+        //     get
+        //     {
+        //         return openPathGameWnd ?? new RelayCommand(obj =>
+        //         {
+        //             OpenPathGameWindowMethod();
+        //         }
+        //         );
+        //     }
+        // }
+        // private static void OpenPathGameWindowMethod()
+        // {
+        //     LocationOfGame pathGame = new LocationOfGame();
+        //     pathGame.Owner = Application.Current.MainWindow;
+        //     pathGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+        //     pathGame.ShowDialog();
+        // }
 
         private void NotifyPropertyChanged(String propertyName)
         {
