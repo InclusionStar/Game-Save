@@ -4,9 +4,9 @@ namespace Game_Save.Model
 {
     public class GameSaveDbContext : DbContext
     {
-        public DbSet<Game> Games { get; set; }
-        public DbSet<GameSlot> GameSlots { get; set; }
-        public DbSet<GameSave> GameSaves { get; set; }
+        public DbSet<Game>? Games { get; set; }
+        public DbSet<GameSlot>? GameSlots { get; set; }
+        public DbSet<GameSave>? GameSaves { get; set; }
 
         protected override void OnConfiguring(
             DbContextOptionsBuilder optionsBuilder)
