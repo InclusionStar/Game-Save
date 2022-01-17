@@ -2,23 +2,33 @@
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using Game_Save.Model;
-using Game_Save.View;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Win32;
 
 namespace Game_Save.ViewModel
 {
-    public class AddNewGameVM
+    public class AddNewGameVM : INotifyPropertyChanged
     {
+        private string gamePath;
         private GameSaveDbContext db;
         private IEnumerable<Game> games;
         private IEnumerable<GameSlot> gameSlots;
         private IEnumerable<GameSave> gameSaves;
         
         public string GameName { get; set; }
-        public string GamePath { get; set; }
+
+        public string GamePath
+        {
+            get => gamePath;
+            set
+            {
+                gamePath = value;
+                OnPropertyChanged();
+            }
+        }
         
         private RelayCommand? openDialogWindow;
         public RelayCommand OpenDialogWindow
@@ -89,6 +99,12 @@ namespace Game_Save.ViewModel
             db.SaveChanges();
 
             return gameSave;
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
