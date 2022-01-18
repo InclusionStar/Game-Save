@@ -41,28 +41,15 @@ namespace Game_Save.ViewModel
         }
 
         private RelayCommand? openAddGameWnd;
-        public RelayCommand OpenAddGameWnd
-        {
-            get {
-                return openAddGameWnd ?? new RelayCommand( obj =>
-                    {
-                        AddNewGame addGame = new AddNewGame();
-                        addGame.Owner = Application.Current.MainWindow;
-                        addGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-                        addGame.ShowDialog();
-                    }
-                    );
-            }
-        }
+        public RelayCommand OpenAddGameWnd =>
+            openAddGameWnd ?? new RelayCommand( _ =>
+            {
+                AddNewGame addGame = new AddNewGame();
+                addGame.Owner = Application.Current.MainWindow;
+                addGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                addGame.ShowDialog();
+            });
 
-        // private static void OpenAddGameWindowMethod()
-        // {
-        //     AddNewGame addGame = new AddNewGame();
-        //     addGame.Owner = Application.Current.MainWindow;
-        //     addGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-        //     addGame.ShowDialog();
-        // }
-        //
         // private RelayCommand openPathGameWnd;
         // public RelayCommand OpenPathGameWnd
         // {
