@@ -40,30 +40,29 @@ namespace Game_Save.ViewModel
             }
         }
 
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-
         private RelayCommand? openAddGameWnd;
         public RelayCommand OpenAddGameWnd
         {
             get {
                 return openAddGameWnd ?? new RelayCommand( obj =>
                     {
-                        OpenAddGameWindowMethod();
+                        AddNewGame addGame = new AddNewGame();
+                        addGame.Owner = Application.Current.MainWindow;
+                        addGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                        addGame.ShowDialog();
                     }
                     );
             }
         }
 
-        private static void OpenAddGameWindowMethod()
-        {
-            AddNewGame addGame = new AddNewGame();
-            addGame.Owner = Application.Current.MainWindow;
-            addGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-            addGame.ShowDialog();
-        }
-
+        // private static void OpenAddGameWindowMethod()
+        // {
+        //     AddNewGame addGame = new AddNewGame();
+        //     addGame.Owner = Application.Current.MainWindow;
+        //     addGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+        //     addGame.ShowDialog();
+        // }
+        //
         // private RelayCommand openPathGameWnd;
         // public RelayCommand OpenPathGameWnd
         // {
@@ -84,12 +83,10 @@ namespace Game_Save.ViewModel
         //     pathGame.ShowDialog();
         // }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
         private void NotifyPropertyChanged(String propertyName)
         {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }
