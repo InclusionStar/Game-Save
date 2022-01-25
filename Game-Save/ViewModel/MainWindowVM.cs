@@ -7,44 +7,62 @@ using Game_Save.View;
 using Game_Save.Model;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace Game_Save.ViewModel
 {
     public class MainWindowVM : INotifyPropertyChanged
     {
-        public ObservableCollection<Game> AllGames
+        private GameSaveDbContext db;
+        public ObservableCollection<Game> games;
+        private ObservableCollection<GameSlot> gameSlots;
+        public ObservableCollection<GameSave> gameSaves;
+        
+        // public ObservableCollection<Game> AllGames
+        // {
+        //     get
+        //     {
+        //         using (GameSaveDbContext db = new GameSaveDbContext())
+        //         {
+        //             try
+        //             {
+        //                 var E = new ObservableCollection<Game>();
+        //                 foreach (var a in db.Games.ToList())
+        //                 {
+        //                     E.Add(a);
+        //                 }
+        //                 return E;
+        //             }
+        //             catch
+        //             {
+        //                 return new ObservableCollection<Game>();
+        //             }
+        //         }
+        //     }
+        //     private set
+        //     {
+        //         OnPropertyChanged("AllGames");
+        //     }
+        // }
+
+        public MainWindowVM()
         {
-            get
-            {
-                using (GameSaveDbContext db = new GameSaveDbContext())
-                {
-                    try
-                    {
-                        var E = new ObservableCollection<Game>();
-                        foreach (var a in db.Games.ToList())
-                        {
-                            E.Add(a);
-                        }
-                        return E;
-                    }
-                    catch
-                    {
-                        return new ObservableCollection<Game>();
-                    }
-                }
-            }
-            private set
-            {
-                NotifyPropertyChanged("AllGames");
-            }
+            db = new GameSaveDbContext();
+            db.Games.Load();
+            db.GameSlots.Load();
+            db.GameSaves.Load();
+            games = db.Games.Local.ToObservableCollection();
+            gameSlots = db.GameSlots.Local.ToObservableCollection();
+            gameSaves = db.GameSaves.Local.ToObservableCollection();
         }
 
         private RelayCommand? openAddGameWnd;
         public RelayCommand OpenAddGameWnd =>
             openAddGameWnd ?? new RelayCommand( _ =>
             {
-                AddNewGame addGame = new AddNewGame();
+                AddNewGame addGame = new AddNewGame(this);
                 addGame.Owner = Application.Current.MainWindow;
                 addGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addGame.ShowDialog();
@@ -70,8 +88,10 @@ namespace Game_Save.ViewModel
         //     pathGame.ShowDialog();
         // }
 
+
         public event PropertyChangedEventHandler? PropertyChanged;
-        private void NotifyPropertyChanged(String propertyName)
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

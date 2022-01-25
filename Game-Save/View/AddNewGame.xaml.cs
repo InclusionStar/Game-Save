@@ -9,10 +9,10 @@ namespace Game_Save.View
     /// </summary>
     public partial class AddNewGame : Window
     {
-        public AddNewGame()
+        public AddNewGame(MainWindowVM parentVM)
         {
             InitializeComponent();
-            DataContext = new AddNewGameVM();
+            DataContext = new AddNewGameVM(parentVM);
         }
     }
 }

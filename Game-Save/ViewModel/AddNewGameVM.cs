@@ -14,9 +14,7 @@ namespace Game_Save.ViewModel
     {
         private string gamePath;
         private GameSaveDbContext db;
-        private IEnumerable<Game> games;
-        private IEnumerable<GameSlot> gameSlots;
-        private IEnumerable<GameSave> gameSaves;
+        private MainWindowVM parentVM;
         
         public string GameName { get; set; }
 
@@ -48,7 +46,9 @@ namespace Game_Save.ViewModel
                 var window = obj as Window;
                 var gameSave = AddNewGame();
                 var fileName = Path.GetFileName(gameSave.Path);
-                UpdateAllDepartmentsView();
+                
+                parentVM.gameSaves.Add(gameSave);
+                // UpdateAllDepartmentsView();
                 if (File.Exists(GamePath))
                 {
                     if (!Directory.Exists($"./Storage/"))
@@ -64,25 +64,22 @@ namespace Game_Save.ViewModel
             });
         }
 
-        public AddNewGameVM()
+        public AddNewGameVM(MainWindowVM parentVM)
         {
             db = new GameSaveDbContext();
             db.Games.Load();
             db.GameSlots.Load();
             db.GameSaves.Load();
-            games = db.Games.Local.ToBindingList();
-            gameSlots = db.GameSlots.Local.ToBindingList();
-            gameSaves = db.GameSaves.Local.ToBindingList();
         }
 
-        private void UpdateAllDepartmentsView()
-        {
-            var AllGames = db.Games.ToList();
-            MainWindow.AllGamesView.ItemsSource = null;
-            MainWindow.AllGamesView.Items.Clear();
-            MainWindow.AllGamesView.ItemsSource = AllGames;
-            MainWindow.AllGamesView.Items.Refresh();
-        }
+        // private void UpdateAllDepartmentsView()
+        // {
+        //     var AllGames = db.Games.ToList();
+        //     MainWindow.AllGamesView.ItemsSource = null;
+        //     MainWindow.AllGamesView.Items.Clear();
+        //     MainWindow.AllGamesView.ItemsSource = AllGames;
+        //     MainWindow.AllGamesView.Items.Refresh();
+        // }
 
         private GameSave AddNewGame()
         {

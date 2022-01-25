@@ -14,7 +14,7 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Background="#FFFFFF" Width="800" HorizontalAlignment="Left" VerticalAlignment="Top">
             <ScrollViewer CanContentScroll="True">
-                <ItemsControl  x:Name="ViewAllGames" ItemsSource="{Binding AllGames}" Height="auto">
+                <ItemsControl ItemsSource="{Binding Games}" Height="auto">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
