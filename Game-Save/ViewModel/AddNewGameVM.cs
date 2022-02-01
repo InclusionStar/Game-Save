@@ -12,12 +12,13 @@ namespace Game_Save.ViewModel
 {
     public class AddNewGameVM : INotifyPropertyChanged
     {
+        private readonly MainWindowVM parentVM;
         private string gamePath;
         private GameSaveDbContext db;
-        private MainWindowVM parentVM;
         
+        #region Bindings
         public string GameName { get; set; }
-
+        
         public string GamePath
         {
             get => gamePath;
@@ -27,10 +28,11 @@ namespace Game_Save.ViewModel
                 OnPropertyChanged();
             }
         }
+        #endregion
         
-        private RelayCommand? openDialogWindow;
+        #region Commands
         public RelayCommand OpenDialogWindow
-            => openDialogWindow ?? new RelayCommand(obj =>
+            => new RelayCommand(obj =>
             {
                 OpenFileDialog openFileDialog = new();
                 openFileDialog.Filter = "All files(*.*)|*.*";
@@ -38,17 +40,15 @@ namespace Game_Save.ViewModel
                     GamePath = openFileDialog.FileName;
             });
 
-        private RelayCommand? addGame;
         public RelayCommand AddGame
-        {
-            get => addGame ?? new RelayCommand(obj =>
+            => new RelayCommand(obj =>
             {
                 var window = obj as Window;
                 var gameSave = AddNewGame();
                 var fileName = Path.GetFileName(gameSave.Path);
                 
-                parentVM.gameSaves.Add(gameSave);
-                // UpdateAllDepartmentsView();
+                parentVM.GameSaves.Add(gameSave);
+                
                 if (File.Exists(GamePath))
                 {
                     if (!Directory.Exists($"./Storage/"))
@@ -62,24 +62,16 @@ namespace Game_Save.ViewModel
 
                 window.Close();
             });
-        }
+        #endregion
 
         public AddNewGameVM(MainWindowVM parentVM)
         {
+            this.parentVM = parentVM;
             db = new GameSaveDbContext();
             db.Games.Load();
             db.GameSlots.Load();
             db.GameSaves.Load();
         }
-
-        // private void UpdateAllDepartmentsView()
-        // {
-        //     var AllGames = db.Games.ToList();
-        //     MainWindow.AllGamesView.ItemsSource = null;
-        //     MainWindow.AllGamesView.Items.Clear();
-        //     MainWindow.AllGamesView.ItemsSource = AllGames;
-        //     MainWindow.AllGamesView.Items.Refresh();
-        // }
 
         private GameSave AddNewGame()
         {

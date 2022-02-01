@@ -16,51 +16,13 @@ namespace Game_Save.ViewModel
     public class MainWindowVM : INotifyPropertyChanged
     {
         private GameSaveDbContext db;
-        public ObservableCollection<Game> games;
-        private ObservableCollection<GameSlot> gameSlots;
-        public ObservableCollection<GameSave> gameSaves;
+
+        public ObservableCollection<Game> Games { get; set; }
+        public ObservableCollection<GameSlot> GameSlots { get; set; }
+        public ObservableCollection<GameSave> GameSaves { get; set; }
         
-        // public ObservableCollection<Game> AllGames
-        // {
-        //     get
-        //     {
-        //         using (GameSaveDbContext db = new GameSaveDbContext())
-        //         {
-        //             try
-        //             {
-        //                 var E = new ObservableCollection<Game>();
-        //                 foreach (var a in db.Games.ToList())
-        //                 {
-        //                     E.Add(a);
-        //                 }
-        //                 return E;
-        //             }
-        //             catch
-        //             {
-        //                 return new ObservableCollection<Game>();
-        //             }
-        //         }
-        //     }
-        //     private set
-        //     {
-        //         OnPropertyChanged("AllGames");
-        //     }
-        // }
-
-        public MainWindowVM()
-        {
-            db = new GameSaveDbContext();
-            db.Games.Load();
-            db.GameSlots.Load();
-            db.GameSaves.Load();
-            games = db.Games.Local.ToObservableCollection();
-            gameSlots = db.GameSlots.Local.ToObservableCollection();
-            gameSaves = db.GameSaves.Local.ToObservableCollection();
-        }
-
-        private RelayCommand? openAddGameWnd;
         public RelayCommand OpenAddGameWnd =>
-            openAddGameWnd ?? new RelayCommand( _ =>
+            new RelayCommand( _ =>
             {
                 AddNewGame addGame = new AddNewGame(this);
                 addGame.Owner = Application.Current.MainWindow;
@@ -68,6 +30,17 @@ namespace Game_Save.ViewModel
                 addGame.ShowDialog();
             });
 
+        public MainWindowVM()
+        {
+            db = new GameSaveDbContext();
+            db.Games.Load();
+            db.GameSlots.Load();
+            db.GameSaves.Load();
+            Games = db.Games.Local.ToObservableCollection();
+            GameSlots = db.GameSlots.Local.ToObservableCollection();
+            GameSaves = db.GameSaves.Local.ToObservableCollection();
+        }
+        
         // private RelayCommand openPathGameWnd;
         // public RelayCommand OpenPathGameWnd
         // {
