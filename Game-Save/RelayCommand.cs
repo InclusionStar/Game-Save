@@ -5,8 +5,8 @@ namespace Game_Save
 {
     public class RelayCommand : ICommand
     {
-        private readonly Action<object> _execute;
-        private readonly Func<object, bool>? _canExecute;
+        private readonly Action<object?> _execute;
+        private readonly Func<object?, bool>? _canExecute;
 
         public event EventHandler? CanExecuteChanged
         {
@@ -14,7 +14,7 @@ namespace Game_Save
             remove => CommandManager.RequerySuggested -= value; 
         }
 
-        public RelayCommand(Action<object> execute, Func<object, bool>? canExecute = null)
+        public RelayCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
         {
             _execute = execute;
             _canExecute = canExecute;
@@ -22,13 +22,12 @@ namespace Game_Save
 
         public bool CanExecute(object? parameter)
         {
-            if (parameter == null) parameter = new object();
             return _canExecute == null || _canExecute(parameter);
         }
 
         public void Execute(object? parameter)
         {
-            if (parameter != null) _execute(parameter);
+            _execute(parameter);
         }
     }
 }
