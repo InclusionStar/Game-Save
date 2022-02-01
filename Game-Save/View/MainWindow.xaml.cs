@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Game_Save.ViewModel;
 
-namespace Game_Save
+namespace Game_Save.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
