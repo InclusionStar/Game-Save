@@ -7,6 +7,7 @@ using Game_Save.View;
 using Game_Save.Model;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,13 +22,24 @@ namespace Game_Save.ViewModel
         public ObservableCollection<GameSlot> GameSlots { get; set; }
         public ObservableCollection<GameSave> GameSaves { get; set; }
         
-        public RelayCommand OpenAddGameWnd =>
-            new RelayCommand( _ =>
+        public RelayCommand OpenAddGameWnd 
+            => new RelayCommand( _ =>
             {
                 AddNewGame addGame = new AddNewGame(this);
                 addGame.Owner = Application.Current.MainWindow;
                 addGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 addGame.ShowDialog();
+            });
+
+        public RelayCommand OpenPathGameWnd
+            => new RelayCommand(obj =>
+            {
+                var path = obj as string;
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = "explorer", 
+                    Arguments = $"/n, /select, {path}"
+                });
             });
 
         public MainWindowVM()
@@ -40,27 +52,6 @@ namespace Game_Save.ViewModel
             GameSlots = db.GameSlots.Local.ToObservableCollection();
             GameSaves = db.GameSaves.Local.ToObservableCollection();
         }
-        
-        // private RelayCommand openPathGameWnd;
-        // public RelayCommand OpenPathGameWnd
-        // {
-        //     get
-        //     {
-        //         return openPathGameWnd ?? new RelayCommand(obj =>
-        //         {
-        //             OpenPathGameWindowMethod();
-        //         }
-        //         );
-        //     }
-        // }
-        // private static void OpenPathGameWindowMethod()
-        // {
-        //     LocationOfGame pathGame = new LocationOfGame();
-        //     pathGame.Owner = Application.Current.MainWindow;
-        //     pathGame.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-        //     pathGame.ShowDialog();
-        // }
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
