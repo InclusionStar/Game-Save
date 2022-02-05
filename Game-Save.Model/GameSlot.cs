@@ -28,7 +28,8 @@ namespace Game_Save.Model
         private void OnChange(object sender, FileSystemEventArgs e)
         {
             var fileName =  System.IO.Path.GetFileName(Path);
-            if (Path != null) 
+            File.Delete($"./Storage/{Name}/{fileName}");
+            if (Path != null)
                 File.Copy(Path, $"./Storage/{Name}/{fileName}");
         }
     }

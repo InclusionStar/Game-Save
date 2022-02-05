@@ -57,10 +57,10 @@ namespace Game_Save.ViewModel
                         Directory.CreateDirectory($"./Storage/{GameName}/");
                     
                     File.Copy(GamePath, $"./Storage/{GameName}/{fileName}");
-                    // gameSave.GameSlot.StartListening();
+                    gameSave.GameSlot?.StartListening();
                 }
 
-                window.Close();
+                window?.Close();
             });
         #endregion
 
